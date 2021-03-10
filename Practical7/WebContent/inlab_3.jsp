@@ -8,9 +8,10 @@
 </head>
 <body>
 	<h3>Change Password</h3>
-	<form action='inlab_1.jsp' action='post'>
+	<form action='inlab_4.jsp' action='post'>
 		<%
 			String uname = request.getParameter("uname");
+		session.setAttribute("uname", uname);
 		%>
 		<h3>User : <%= uname %></h3>
 		<label for='pwd'>Enter New Password</label>

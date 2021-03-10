@@ -1,4 +1,4 @@
- <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ page import = 'java.sql.*' %>
 <!DOCTYPE html>
@@ -16,7 +16,7 @@
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			Connection con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","ep","ep123");
 			
-			String sql = "select * from prac7 where username = ? and password = ?";
+			String sql = "select * from postlab7 where username = ? and password = ?";
 			
 			PreparedStatement ps = con.prepareStatement(sql);
 			
@@ -26,10 +26,11 @@
 			ResultSet rs = ps.executeQuery();
 			
 			if(rs.next()){
-				out.println("Login success");
+				session.setAttribute("uname", uname);
+				session.setAttribute("pwd",pwd);
+				response.sendRedirect("inlab2_3.jsp");
 			}else{
-				out.println("Wrong password");
-				out.println("<a href='inlab_3.jsp?uname="+uname+"'>Forgot Password</a>");
+				response.sendRedirect("inlab2_1.jsp");
 			}
 		}catch(ClassNotFoundException e){
 			e.printStackTrace();

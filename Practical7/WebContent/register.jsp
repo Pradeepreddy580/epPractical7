@@ -1,22 +1,22 @@
- <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@ page import = 'java.sql.*' %>
+    <%@ page import = 'java.sql.*' %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Login</title>
+<title>Register</title>
 </head>
 <body>
-	<%
-		String uname = request.getParameter("uname");
-		String pwd = request.getParameter("pwd");
+<%
+		String uname = "def@mail.com";
+		String pwd = "abc123";
 		
 		try{
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			Connection con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","ep","ep123");
 			
-			String sql = "select * from prac7 where username = ? and password = ?";
+			String sql = "insert into prac7 values(?,?)";
 			
 			PreparedStatement ps = con.prepareStatement(sql);
 			
@@ -26,10 +26,9 @@
 			ResultSet rs = ps.executeQuery();
 			
 			if(rs.next()){
-				out.println("Login success");
+				System.out.println("Login success");
 			}else{
-				out.println("Wrong password");
-				out.println("<a href='inlab_3.jsp?uname="+uname+"'>Forgot Password</a>");
+				System.out.println("Wrong password");
 			}
 		}catch(ClassNotFoundException e){
 			e.printStackTrace();
